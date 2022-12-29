@@ -1,0 +1,34 @@
+{
+  "employees": [
+    {
+      "name": "Rajat Satashiya",
+      "age": "12",
+      "address": "asd",
+      "department": "frontend",
+      "salary": 12500,
+      "marital": true,
+      "photo": "",
+      "id": 1
+    },
+    {
+      "name": "rachit",
+      "age": "21",
+      "address": "asoih",
+      "department": "frontend",
+      "salary": 1000,
+      "marital": false,
+      "photo": "",
+      "id": 2
+    },
+    {
+      "name": "demo",
+      "age": "34",
+      "address": "mumbai",
+      "department": "backend",
+      "salary": 120000,
+      "marital": false,
+      "photo": "",
+      "id": 3
+    }
+  ]
+}

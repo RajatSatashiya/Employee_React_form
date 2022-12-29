@@ -4,7 +4,7 @@ import Table from "./Table";
 export default function Employee() {
   const [url, setUrl] = useState(null);
   const previewRef = useRef();
-  const [showtable, setShowtable] = useState(false);
+  const [employees, setEmployees] = useState([]);
   const [formdata, setFormdata] = useState([]);
 
   // refs for form elements
@@ -16,6 +16,36 @@ export default function Employee() {
   const photoInputRef = useRef(null);
   const marriedInputRef = useRef(null);
   const singleInputRef = useRef(null);
+
+  //get request
+  const getEmployeeData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/employees`);
+      const data = await response.json();
+      setFormdata(data);
+      setEmployees(data);
+    } catch (e) {
+      console.log("Error: " + e);
+    }
+  };
+
+  //post request
+  const postEmployeeData = async (emp) => {
+    try {
+      const response = await fetch(`http://localhost:3000/employees`, {
+        method: "POST",
+        body: JSON.stringify(emp),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await response.json();
+      setFormdata([...formdata, data]);
+      setEmployees([...employees, data]);
+    } catch (e) {
+      console.log("Error: " + e);
+    }
+  };
 
   const formHandle = (e) => {
     e.preventDefault();
@@ -31,20 +61,28 @@ export default function Employee() {
       department: departmentInputRef.current.value,
       salary: Number(salaryInputRef.current.value),
       marital: marriedInputRef.current.checked,
-      photo: theurl
+      photo: theurl,
     };
 
-    setFormdata([...formdata, data]);
-    setShowtable(true);
-
+    postEmployeeData(data);
     e.target.reset();
+  };
+
+  const filterHandle = (val) => {
+    if (val === "none") {
+      setFormdata(employees);
+    } else {
+      let filteredValues = employees.filter((emp) => {
+        return val == emp.department;
+      });
+      setFormdata(filteredValues);
+    }
   };
 
   const sortHandle = () => {
     //.sort will sort the array inplace, so we need to make a copy
     //to get sorted array without changing formdata
     // thus [...formdata] is used
-    console.log(...formdata);
     var tempvalues = [...formdata].sort((a, b) => {
       return a.salary - b.salary;
     });
@@ -52,6 +90,7 @@ export default function Employee() {
   };
 
   useEffect(() => {
+    getEmployeeData();
     return () => {
       url && URL.revokeObjectURL(url);
     };
@@ -117,7 +156,11 @@ export default function Employee() {
       </form>
 
       {url && <img src={url} className="image" alt="upload preview" />}
-      {showtable && <Table data={formdata} sortHandle={sortHandle} />}
+      <Table
+        data={formdata}
+        sortHandle={sortHandle}
+        filterHandle={filterHandle}
+      />
     </>
   );
 }

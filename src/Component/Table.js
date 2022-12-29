@@ -1,26 +1,22 @@
 import Tableitem from "./Tableitem";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
 export default function Table(props) {
-  const [dept, setDept] = useState("none");
   const deptFilter = useRef();
 
-  const displayItems = props.data.map((item, index) => {
-    if (dept === "none") {
-      return <Tableitem key={index} {...item} />;
-    } else if (dept === item.department) {
-      return <Tableitem key={index} {...item} />;
-    }
-  });
+  const displayItems = props.data.map((item, index) => (
+    <Tableitem key={index} {...item} />
+  ));
 
-  const filterHandle = () => {
-    setDept(deptFilter.current.value);
-  };
   return (
     <>
       <div>
         Filter via Department:
-        <select name="department" ref={deptFilter} onChange={filterHandle}>
+        <select
+          name="department"
+          ref={deptFilter}
+          onChange={() => props.filterHandle(deptFilter.current.value)}
+        >
           <option value="none">No filter</option>
           <option value="frontend">Frontend</option>
           <option value="backend">Backend</option>
