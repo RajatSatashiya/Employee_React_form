@@ -5,7 +5,7 @@ export default function Table(props) {
   const deptFilter = useRef();
 
   const displayItems = props.data.map((item, index) => (
-    <Tableitem key={index} {...item} />
+    <Tableitem key={index} {...item} deleteItem={props.deleteItem} />
   ));
 
   return (

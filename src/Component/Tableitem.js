@@ -11,6 +11,8 @@ export default function Tableitem(props) {
         <td>
           <img src={props.photo} className="tablepic" />
         </td>
+
+        <td onClick={() => props.deleteItem(props.name)}>Delete</td>
       </tr>
     </>
   );

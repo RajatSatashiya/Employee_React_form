@@ -47,6 +47,23 @@ export default function Employee() {
     }
   };
 
+  //delete request
+  const deleteItem = async (name) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/employees?name=${name}`
+      );
+      const data = await response.json();
+      await fetch(`http://localhost:3000/employees/${data[0].id}`, {
+        method: "DELETE",
+      });
+
+      getEmployeeData();
+    } catch (e) {
+      console.log("Error: " + e);
+    }
+  };
+
   const formHandle = (e) => {
     e.preventDefault();
 
@@ -160,6 +177,7 @@ export default function Employee() {
         data={formdata}
         sortHandle={sortHandle}
         filterHandle={filterHandle}
+        deleteItem={deleteItem}
       />
     </>
   );

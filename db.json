@@ -1,34 +1,14 @@
 {
   "employees": [
     {
-      "name": "Rajat Satashiya",
-      "age": "12",
-      "address": "asd",
-      "department": "frontend",
-      "salary": 12500,
-      "marital": true,
-      "photo": "",
-      "id": 1
-    },
-    {
-      "name": "rachit",
-      "age": "21",
-      "address": "asoih",
-      "department": "frontend",
-      "salary": 1000,
-      "marital": false,
-      "photo": "",
-      "id": 2
-    },
-    {
-      "name": "demo",
-      "age": "34",
+      "name": "sachin",
+      "age": "50",
       "address": "mumbai",
-      "department": "backend",
-      "salary": 120000,
+      "department": "frontend",
+      "salary": 1000000,
       "marital": false,
-      "photo": "",
-      "id": 3
+      "photo": "blob:http://localhost:3001/ad62f7e6-0df3-4787-8df2-80e4f4fb4882",
+      "id": 2
     }
   ]
 }
