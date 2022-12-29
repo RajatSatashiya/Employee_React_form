@@ -1,0 +1,16 @@
+.scroll-container {
+  overflow-y: auto;
+  max-height: 12rem;
+}
+
+img {
+  width: 400px;
+}
+
+.image {
+  width: 150px;
+}
+
+.tablepic {
+  width: 30px;
+}
